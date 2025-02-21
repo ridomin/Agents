@@ -1,7 +1,7 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License.
 
-import { CardFactory, TurnContext, ActionTypes, Activity, ActivityTypes, Attachment } from '@microsoft/agents-bot-hosting'
+import { CardFactory, TurnContext, ActionTypes, Activity, ActivityTypes, Attachment, HeroCard } from '@microsoft/agents-bot-hosting'
 
 export class CardMessages {
   static async sendIntroCard(context: TurnContext): Promise<void> {
@@ -25,7 +25,7 @@ export class CardMessages {
     await CardMessages.sendActivity(context, card)
   }
 
-  static async sendAdaptiveCard(context: TurnContext, adaptiveCard: any): Promise<void> {
+  static async sendAdaptiveCard(context: TurnContext, adaptiveCard: HeroCard): Promise<void> {
     const card = CardFactory.adaptiveCard(adaptiveCard)
 
     await CardMessages.sendActivity(context, card)

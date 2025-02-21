@@ -1,6 +1,6 @@
 // @ts-check
 
-import { ActivityHandler, MessageFactory, MsalTokenProvider } from '@microsoft/agents-bot-hosting'
+import { ActivityHandler, MessageFactory } from '@microsoft/agents-bot-hosting'
 import { default as pjson } from '../node_modules/@microsoft/agents-bot-hosting/package.json' with { type: "json" }
 
 export class EchoBot extends ActivityHandler {

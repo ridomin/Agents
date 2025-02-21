@@ -26,7 +26,9 @@ async function acquireToken(settings: ConnectionSettings): Promise<string> {
     system: {
       loggerOptions: {
         loggerCallback(loglevel: msal.LogLevel, message: string, containsPii: boolean) {
-          console.log(message)
+          if (!containsPii) {
+            console.log(message)
+          }
         },
         piiLoggingEnabled: false,
         logLevel: msal.LogLevel.Verbose,
@@ -97,7 +99,7 @@ const main = async () => {
   const act: Activity = await copilotClient.startConversationAsync(true)
   console.log('\nSuggested Actions: ')
   act.suggestedActions?.actions.forEach((action: CardAction) => console.log(action.value))
-  await askQuestion(copilotClient, act.conversation?.id!)
+  await askQuestion(copilotClient, act.conversation?.id as string)
 }
 
 main().catch(e => console.log(e))
