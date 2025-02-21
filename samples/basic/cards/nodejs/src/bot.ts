@@ -3,13 +3,13 @@
 
 import { ActivityHandler, Activity, ActivityTypes } from '@microsoft/agents-bot-hosting'
 import { CardMessages } from './cardMessages'
-const AdaptiveCard = require('../resources/adaptiveCard.json')
+import AdaptiveCard from './resources/adaptiveCard.json'
 
 export class CardFactoryBot extends ActivityHandler {
   constructor() {
     super()
 
-    this.onMembersAdded(async (context, next) => {
+    this.onMembersAdded(async (  context, next) => {
       const membersAdded = context.activity.membersAdded
       for (let cnt = 0; cnt < membersAdded!.length; cnt++) {
         if ((context.activity.recipient != null) && membersAdded![cnt].id !== context.activity.recipient.id) {
