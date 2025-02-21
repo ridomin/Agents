@@ -26,7 +26,15 @@ Take note of the tunnelUrl
 
 1. Create an EntraID app registration, and save the authentication information in the `.env` file, following any of the [available options](https://microsoft.github.io/Agents/HowTo/azurebot-auth-for-js.html) for Single Tenant.
 1. Update the Home page URL in the app registration with the tunnel url.
-1. Update the manifest replacing the `{baseUrl}` with the `{tunnelUrl}` and `{clientId}` with the `{appId}` from EntraID
+1. Update the manifest, replacing the `{baseUrl}` with the `{tunnelUrl}` and `{clientId}` with the `{appId}` from EntraID 
+
+```ps
+$url='{tunnelUrl}'
+$clientId='{clientId}'
+(Get-Content public/manifest.template.json).Replace('{baseUrl}', $url).Replace('{clientId}', $clientId) | Set-Content public/manifest.json
+
+```
+
 1. - [Configure a skill](https://learn.microsoft.com/en-us/microsoft-copilot-studio/configuration-add-skills#configure-a-skill)
     1. In CopilotStudio navigate to the Agent settings, skills, and register the skill with the URL `{tunnelUrl}/manifest.json`
     1. In CopilotStudio navigate to the Agent topics, add a new trigger to invoke an action to call the skill
@@ -45,13 +53,3 @@ Take note of the tunnelUrl
 
 1. Once the express app is running, in localhost or in Azure
 1. Use the CopilotStudio _Test your agent_ chat UI, and use the trigger defined to invoke the skill
-
-# Helper Scripts
-
-Replace Manifest Values
-
-```ps
-$url='{tunnelUrl}'
-$clientId='{clientId}'
-(Get-Content public/manifest.template.json).Replace('{baseUrl}', $url).Replace('{clientId}', $clientId) | Set-Content public/manifest.json
-```
