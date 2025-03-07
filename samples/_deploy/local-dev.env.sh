@@ -3,6 +3,19 @@
 resource_group="ridomin-dev"
 tunnel_id="ridomin-dev"
 
+
+if ! az account show &> /dev/null; then
+    echo "Please login to Azure CLI."
+    echo "az login"
+    exit 1
+fi
+
+if ! devtunnel user show &> /dev/null; then
+    echo "Please login to DevTunnel."
+    echo "devtunnel user login"
+    exit 1
+fi
+
 if ! devtunnel show $tunnel_id &> /dev/null; then
     devtunnel create $tunnel_id -a
     devtunnel port create $tunnel_id -p 3978
